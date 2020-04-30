@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <title>Document</title>
+    <style>
+      * {
+          box-sizing: border-box;
+        }
+        
+        #myInput {
+          background-position: 10px 10px;
+          background-repeat: no-repeat;
+          width: 100%;
+          font-size: 16px;
+          padding: 12px 20px 12px 40px;
+          border: 1px solid #ddd;
+          margin-bottom: 12px;
+          text-align: center;
+        }
+        
+        #myTable {
+          border-collapse: collapse;
+          width: 100%;
+          border: 1px solid #ddd;
+          font-size: 18px;
+          text-align: center;
+        }
+        
+        #myTable th, #myTable td {
+          text-align: left;
+          padding: 12px;
+          text-align: center;
+        }
+        
+        #myTable tr {
+          border-bottom: 1px solid #ddd;
+        }
+        
+        #myTable tr.header, #myTable tr:hover {
+          background-color: #f1f1f1;
+        }
+      </style>
+</head>
+<body>
+  {% include "includes/navbaruser.html" %}
+
+    <br><br><br>
+
+    <h2 style="text-align: center;">Kitap Al {{userr}}</h2> <br>
+
+    <div class="form-row">
+      <div class="form-group col-md-6" style="margin: auto;">
+        <input style="border: 2px; border-style: solid;" type="text" id="myInput" onkeyup="filtrele();" placeholder="Kitap adi veya ISBN numarası giriniz.." title="Type in a name">
+      </div>
+      <form method=post enctype=multipart/form-data style="margin-left: 200px;">
+       <div class="form-group col-md-6" style="margin: auto;">
+          <input style="margin-right: 10px; margin-top: 20px; border: 2px; border-style: solid;" type="text" id="kA" name="kitapAdi" placeholder="Kitap Adi"><input style="margin-left: 10px; margin-top: 20px; border: 2px; border-style: solid;" type="text" name="isbnNo" id = "iN" placeholder="ISBN Numarası"><br>
+       </div>
+       <div>
+       <input style="margin-left: 520px; margin-top: 20px; border: 2px; border-style: solid; background-color: black; color: white;" align="center" id="clickedBook" onclick="silindi()" type=submit value="Kitap Al"><br><br>
+       </div>
+      </form>
+</div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        {% if category == 'success' %}
+        <div class="alert alert-success mb-3" role="alert" style="text-align: center;">
+          {{message}}
+        </div>
+        {% endif %}
+
+        {% if category == 'error' %}
+        <div class="alert alert-danger mb-3" role="alert" style="text-align: center; color: red;">
+          {{message}}
+        </div>
+        {% endif %}
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+<table id="myTable">
+  <tr class="header">
+    <th style="width: 10%;">Kitap Adedi</th>
+    <th style="width:30%;">Kitap Adi</th>
+    <th style="width:30%;">ISBN Numarası</th>
+    <th style="width: 10%;">Tercih</th>
+  </tr>
+  {% for sayac in range(sya) %}
+  <tr>
+      <td id="{{sayac-100}}">{{sayac+1}}</td>
+      <td id="{{sayac}}" onclick="myFunction({{sayac}})">{{kitapAdiTopla[sayac]}}</td>  
+      <td id="{{sayac+100}}" onclick="myFunction({{sayac}})">{{kitapNoTopla[sayac]}}</td>
+      <td><button type="button" method=post style= "text-aligment: end" id = "{{sayac}}" name="buton" onclick="myFunction({{sayac}});" class="btn btn-success"> Seç </button></td>                          
+  </tr>
+  {% endfor %}
+    
+  
+</table>
+    
+
+
+ 
+
+<script>
+function myFunction(sayac) {
+  const todos = document.querySelectorAll("div.form-group");
+  
+  bookName = document.getElementById(sayac).innerHTML
+  isbnNo = document.getElementById(sayac+100).innerHTML
+  
+  
+  console.log(bookName)
+  console.log(isbnNo)
+  
+  var x = document.getElementById("kA");
+  x.value = bookName
+  
+  var y = document.getElementById("iN");
+  y.value = isbnNo
+  
+  console.log(sayac)
+  console.log(todos)
+  otomatic(sayac)
+  
+}
+</script>
+
+<script>
+function otomatic(sayac){
+        
+        if( typeof otomatic.counter == 'undefined' ) {
+            otomatic.counter = 0;
+        }
+        if(typeof sayac == 'undefined'){
+        
+        document.getElementById(songelenSayac).remove()
+        document.getElementById(songelenSayac+100).remove()
+        document.getElementById(songelenSayac).remove()
+        
+        }
+
+
+
+        songelenSayac = sayac;
+        otomatic.counter+= sayac;
+        console.log(otomatic.counter)
+}
+        
+</script>
+
+<script>
+  function filtrele(){
+    
+    var input, filter, table, tr, td, i, textValue,txtValue, ib;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    bi = tr[i].getElementsByTagName("td")[2];
+    console.log('td: ',td)
+    console.log('bi: ',bi)
+    if (td || bi) {
+      textValue = bi.textContent || td.innerText;
+      console.log('textValue: ', textValue)
+      txtValue = td.textContent || td.innerText;
+      console.log('txtValue: ', txtValue)
+      if (txtValue.toUpperCase().indexOf(filter) > -1 || textValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }        
+  }
+    }
+</script>
+
+
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+        <script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
+        <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+</body>
+</html>

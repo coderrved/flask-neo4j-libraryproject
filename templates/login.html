@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <style>
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background: rgb(85, 28, 2);
+        }
+        
+        .box{
+        width: 400px;
+        padding: 40px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        background: rgb(58, 146, 161);
+        text-align: center;
+        }
+        .box h1{
+        color: black;
+        text-transform: uppercase;
+        font-weight: 500;
+        }
+        .box input[type = "text"],.box input[type ="password"]{
+            border: 0px;
+            background: none;
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+            border: 2px solid black;
+            padding: 14px 10px;
+            width: 200px;
+            outline: none;
+            color: black;
+            border-radius: 24px;
+            transition: 0.25s;
+        }
+        .box input[type = "text"]:focus.box input[type = "password"]:focus{
+            width: 280px;
+            border-color: black;
+        }
+        .box input[type = "submit"]{
+            border: 0;
+            background: none;
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+            border: 2px solid black;
+            padding: 14px 40px;
+            outline: none;
+            color: black;
+            border-radius: 24px;
+            transition: 0.25s;
+            cursor: pointer;
+        }
+        .box input[type = "submit"]:hover{
+            background: rgb(58, 146, 161);
+        }
+        ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: black;
+            opacity: 1; /* Firefox */
+        }
+        
+    </style>
+</head>
+<body>
+    <form style="background-image: url('images/kutuphane.jpg');" class="box" action="" method="POST">
+
+        <h1>Login</h1>
+        <input type="text" name="text" placeholder="Kullanıcı Adı"><br>
+        <input type="password" name="password" placeholder="Password"><br>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        {% if category == 'success' %}
+        <div class="alert alert-success mb-3" role="alert" style="text-align: center;">
+          {{message}}
+        </div>
+        {% endif %}
+
+        {% if category == 'error' %}
+        <div class="alert alert-danger mb-3" role="alert" style="text-align: center; color: red;">
+          {{message}}
+        </div>
+        {% endif %}
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+        <input type="submit" name="" value="Login">
+    </form>
+    
+</body>
+</html>

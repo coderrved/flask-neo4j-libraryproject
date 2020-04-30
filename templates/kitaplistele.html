@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <title>Document</title>
+    <style>
+      * {
+          box-sizing: border-box;
+        }
+        
+        #myInput {
+          background-position: 10px 10px;
+          background-repeat: no-repeat;
+          width: 100%;
+          font-size: 16px;
+          padding: 12px 20px 12px 40px;
+          border: 1px solid #ddd;
+          margin-bottom: 12px;
+          text-align: center;
+        }
+        
+        #myTable {
+          border-collapse: collapse;
+          width: 100%;
+          border: 1px solid #ddd;
+          font-size: 18px;
+          text-align: center;
+        }
+        
+        #myTable th, #myTable td {
+          text-align: left;
+          padding: 12px;
+          text-align: center;
+        }
+        
+        #myTable tr {
+          border-bottom: 1px solid #ddd;
+        }
+        
+        #myTable tr.header, #myTable tr:hover {
+          background-color: #f1f1f1;
+        }
+      </style>
+</head>
+<body>
+  {% include "includes/navbar.html" %}
+
+    <br><br><br>
+
+    <h2 style="text-align: center;">Kullanıcı - Kitap Listesi</h2> <br>
+
+<table id="myTable">
+  <tr class="header">
+    <th style="width: 10%;">Kitap</th>
+    <th style="width:40%;">Kullanıcı Adi</th>
+    <th style="width:40%;">Kitap Adi</th>
+    
+  </tr>
+  {% for sayac in range(donenListeKapasitesi) %}
+  <tr>
+    
+                        
+                            <td>{{sayac+1}}</td>
+                            <td>{{kullaniciAdiTopla[sayac]}}</td>  
+                            <td>{{kitapAdiTopla[sayac]}}</td>
+                            
+                            
+  </tr>
+                            {% endfor %}
+    
+  
+</table>
+    
+
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+        <script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
+        <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Upload Image</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  </head>
+  <body>
+
+    {% include "includes/navbar.html" %}
+    <br><br><br><br>
+    <center><h1>Kitap Ekleme</h1></center>
+
+    {% if msg %}
+    <h1>{{ msg }}</h1>
+    {% endif %}
+    <h3>Kitap Fotoğrafını Yükle</h3><hr>
+    <form method=post enctype=multipart/form-data style>
+      <br><p><input type=file name=file><br>
+      <input type="text" name="kitapAdi" placeholder="Kitap Adi"><br>
+         <input type=submit value=Upload>
+    </form>
+    <h4>Kitap Adı</h4>
+    <h1>Result:</h1>
+    {% if img_src %}
+      <img src="{{ img_src }}">
+    {% endif %}
+    
+    {% if extracted_text %}
+      <p style="margin: 30px"> ISBN numarası: <b> {{ extracted_text }} </b></p>
+    
+    {% else %}
+      The extracted text will be displayed here
+    {% endif %}
+    
+    
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+        <script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
+        <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    
+    
+  </body>
+</html>
+    
